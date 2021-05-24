@@ -1,0 +1,8 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: ingress-testapp-service
+    labels: {app: testapp}
+    annotations: {kubernetes.io/ingress.class: alb, alb.ingress.kubernetes.io/scheme: internet-facing, alb.ingress.kubernetes.io/healthcheck-protocol: HTTP, alb.ingress.kubernetes.io/healthcheck-port: traffic-port, alb.ingress.kubernetes.io/healthcheck-interval-seconds: '15', alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '5', alb.ingress.kubernetes.io/success-codes: '200', alb.ingress.kubernetes.io/healthy-threshold-count: '2', alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'}
+spec:
+    rules: [{host: test1.vtour.tv, http: {paths: [{path: '/*', backend: {serviceName: test1-nodeport-service, servicePort: 3000}}]}}, {host: test2.vtour.tv, http: {paths: [{path: '/*', backend: {serviceName: test2-nodeport-service, servicePort: 3001}}]}}]

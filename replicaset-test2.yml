@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: test2-rs
+  labels:
+    app: test2
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: test2
+  template:
+    metadata:
+      labels:
+        app: test2
+    spec:
+      containers:
+      - name: test2-app
+        image: deeprajiicaps/node-test2:t2v4
